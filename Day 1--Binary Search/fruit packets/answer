@@ -1,0 +1,38 @@
+#hint--
+
+If mid packets are formed, then mid apples are already taken and mid bananas are also taken. That leaves us with (A−mid)+(B−mid)+C fruits to fill the empty spot 
+in each of the mid packets. So if condition (A−mid)+(B−mid)+C >= mid is true, then there are enough fruits to form at least mid balanced packets
+
+Now, using above condition apply binary seach in range 0 to min(A,B)
+
+#sol--
+
+int Solution::solve(int A, int B, int C) 
+{
+    int less = std::min(A, B);
+    int more = std::max(A, B);
+     
+    // (A,B,C) combination
+    // if C is the most, we can form all baskets as (1A,1B,1C) combination
+    // when less is finised, we wont have any apple or banana to forma a basket
+    if (C >= less)
+        return less;
+    
+    // fill the C number of baskets with (1A,1B,1C) combination
+    int count = C;    
+    less -= C;
+    more -= C;
+    
+    // we do not have any C left. We can only form (1A,2B,0C) and (2A,1B,0C) baskets. 
+    auto diff = std::min(more - less, less);
+    more -= 2*diff;
+    less -= diff;
+    
+    count += diff;
+    
+    // now we left with same amount of A and B we will form euqal amount of
+    // (1A,2B,0C) and (2A,1B,0C)
+    count += (2*less) / 3 ;
+        
+    return count;
+}
