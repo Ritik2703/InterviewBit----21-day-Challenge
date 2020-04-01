@@ -1,0 +1,31 @@
+##Hint--
+
+In this question , we will consider every bit as an unique bits and evry bit will have independent contribution to the answer . 
+Thus we will iterate over whole array for all bits independently , and we will maintain an 2d array BitInfo[bits][index] ,
+the value at any index ind for any bit will signify the next index on which this bit is set .
+Thus after that index every subarray corresponding to ind will have that bit set . In this manner the 
+contribution of every bit corresponding to each bit can be determined independently and can be added to the overall answer
+
+##Solution--
+
+#define lli long long
+int idx[50];
+int Solution::solve(vector <int> &A)
+{
+    int n = A.size();
+    memset(idx, 0, sizeof(idx));
+        lli ans = 0;
+    for(int i=1; i<=n; ++i){
+        lli tmp = A[i-1];
+        for(int j=0; j<=31; ++j){
+            lli pw = 1l << j;
+            if(tmp & pw){
+                ans += pw * i;
+                idx[j] = i;
+            } else if(idx[j]){
+                ans += pw * idx[j];
+            }
+        }
+    }
+    return ans%1000000007;
+}
