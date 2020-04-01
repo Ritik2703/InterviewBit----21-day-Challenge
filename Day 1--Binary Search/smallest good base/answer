@@ -1,0 +1,61 @@
+/*
+Approach:
+let's say n can be represented in all 1's representation in base k
+then we can write n = 1 + k + k^2 + k^3 + . . . . . . . + k^(m-1) -----(1)
+where m is length of the number in base k
+
+okay, so far so good, 
+we can simply do iterate for all base of string
+
+but that's too useless work.
+
+using binary search, we can optimize much much.
+
+we know the 
+min. length of digit in base is 2 and max length of digit's can be log2(10^18) = 59.79xxxx ~= 60
+
+we can use this fact to find the good base k
+
+
+Now from eqn (1)=> n - 1 = k(1 + k + k^2 + . . . . + k^m-2) ---(2)
+and again from same eqn
+n - k^m-1 = 1 + k + k^2 + . . . . + k^m-2 ------(3)
+
+from eqn. (2) and eqn. (3),
+k^m -1 = n(k-1) ///////////////////////###############
+left ==== right (notation)
+we want this above condition true, once we get it, we are done
+
+one thing is to notice,
+if left < right => k is too big
+if left > right => k too small
+if left == right, we got good k
+
+below is code.
+*/
+
+string Solution::solve(string n){
+    typedef long long int ll;
+    ll num = stoll(n);
+    ll res = 0;
+    for(int m=60;m>=2;m--){
+        ll s=2,e=num;
+        while(s<e){
+            ll k = s + (e-s)/2;
+            ll left = num*(k-1);
+            ll right = ((ll) pow(k, m) - 1ll);
+            if(left == right){
+                res = k;
+                break;
+            }
+            else if(left >right){
+                s = k+1;
+            }
+            else
+                e = k;
+        }
+        if(res!=0) break;
+    }
+    if(res!=0) return to_string(res);
+    return to_string(num-1);
+}
