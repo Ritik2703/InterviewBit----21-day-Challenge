@@ -1,0 +1,28 @@
+bool helper(vector<int> &A, int B, int mid){
+    
+    int cow=1,indx=0;
+    for(int i=1;i<A.size();i++){
+        if(A[i]-A[indx] >=mid){
+            indx=i;
+            cow++;
+        }
+    }
+    return cow>=B;
+}
+
+int Solution::solve(vector<int> &A, int B) {
+    sort(A.begin(), A.end());
+    int s=0, e=A[A.size()-1]-A[0], ans=-1;
+    while(s<=e){
+        int mid=(s+e)>>1;
+        if(helper(A, B, mid)){
+            ans=mid;
+            s=mid+1;
+        }else{
+            e=mid-1;
+        }
+    }
+    return ans;
+    
+}
+
