@@ -1,0 +1,47 @@
+#hint--
+
+There are multiple approaches possible here. We need to make sure we do not allocate extra memory.
+
+Approach 1:
+
+ Count the number of red, white and blue balls.
+Then in another pass, set initial redCount number of cells as 0, next whiteCount cell as 1 and next bluecount cells as 2.
+*Requires 2 pass of the array. * 
+**Approach 2: **
+
+ Swap the 0s to the start of the array maintaining a pointer, and 2s to the end of the array.
+1s will automatically be in their right position. 
+
+#sol--
+
+void Solution::sortColors(vector<int> &A) {
+    // Do not write main() function.
+    // Do not read input, instead use the arguments to the function.
+    // Do not print the output, instead return values as specified
+    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+
+    int red=0;
+    int white=0;
+    int blue=0;
+    int n=A.size();
+    for(int i=0;i<n;i++)
+    {
+        if(A[i]==0)
+            red++;
+        else if(A[i]==1)
+            white++;
+        else
+            blue++;
+    }
+    A.clear();
+    for(int i=0;i<n;i++)
+    {
+        if(i<red)
+            A.push_back(0);
+        else if(i<white+red)
+            A.push_back(1);
+        else
+            A.push_back(2);
+    }
+    
+}
