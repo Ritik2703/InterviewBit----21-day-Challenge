@@ -1,0 +1,32 @@
+#hint--
+
+Start with the largest elements in each of the arrays A,B & C. Maintain a variable to update the answer during each of the steps to be followed.
+In every step, the only possible way to decrease the difference is to decrease the maximum element out of the three elements.
+So traverse to the next largest element in the array containing the maximum element for this step and update the answer variable.
+Repeat this step until the array containing the maximum element ends.
+
+For the given sample example,
+initially, the triplets are { 10, 15, 6} and difference is (15 - 6) = 9 and answer is 9
+in the next step, { 10, 9, 6 }, diff is (10 - 6) = 4 and answer is updated to 4
+next step, { 8, 9, 6 } and diff is 3
+next step, { 8, 6, 6 } and diff is 2
+next step, {5, 6, 6 } and diff is 1
+finally after next two steps we reach { 5, 6, 3 } and cannot continue since array B has ended. Thus the answer is 1.
+Note: you can also start with min element triplet and increment the smallest element at every step.
+
+#Solution--
+
+int Solution::solve(vector<int> &A, vector<int> &B, vector<int> &C) {
+    int ans = INT_MAX;
+    int i=A.size()-1,j=B.size()-1,k=C.size()-1;
+    while(i>=0 and j>=0 and k>=0)
+    {
+        int maxe = max(A[i], max(B[j],C[k]));
+        int mine = min(A[i], min(B[j],C[k]));
+        ans = min(ans, maxe - mine);
+        if(A[i]==maxe) i--;
+        else if(B[j]==maxe) j--;
+        else if(C[k]==maxe) k--;
+    }
+    return ans;
+}
