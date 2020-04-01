@@ -1,0 +1,41 @@
+Given an array of integers A of size N and an integer B.
+
+Some value can be transferred from one element to the other. Every time x is transferred (x is not necessarily an integer) B percent of it is lost.
+That is, if x was transferred from one element to the other, value of first one decreased by x units and in other increased by x -
+(x * B)/100.
+
+Your task is to make all elements of A equal by these transfers.Find what can be the maximum integral value of each element after the transfers.
+
+Note: If maximum possible value is 2.6 return its integral part i.e. 2.
+
+
+
+Input Format
+
+The first argument given is the integer array A.
+The second argument given is the integer B.
+Output Format
+
+Find and return what can be the maximum integral value of each element after the transfers.
+Constraints
+
+1 <= N <= 10000
+0 <= A[i] <= 1000
+0 <= B <= 99
+For Example
+
+Input 1:
+    A = [4, 2, 1]
+    B = 50
+Output 1:
+    2
+Explanation:
+    Transfer x = 2 from A[1] to A[3] 
+
+Input 2:
+    A = [1, 11]
+    B = 90
+Output 2:
+    1
+
+  
