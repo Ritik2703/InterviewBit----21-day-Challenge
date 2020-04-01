@@ -1,0 +1,36 @@
+##Hint--
+
+Assume that all values in input have only 1 bit i.e. Ai = 0 or 1.
+Lets say A = count of elements which are 0
+and B = count of elements which are 1
+
+In this case our answer is just 2AB, since each such pair contributes 1 to answer.
+
+Can you combine this logic if we have multiple bits?
+
+Note that all bits are independent in counting, since we are counting number of bits which are different in each pair.
+So, we just do the same process for all different bits. Since Ai is an integer, we just have to do this for 31 different bits, so our solution is O(31*N).
+
+##Solution--
+
+typedef long long LL;
+#define MOD 1000000007ll
+int Solution::cntBits(vector<int> &A) {
+    int ans=0,n=A.size();
+
+    //traverse over all bits
+    for(int i=0; i<31; i++){
+
+        //count number of elements with ith bit = 0
+        LL cnt=0;
+        for(int j=0; j<n; j++)
+            if((A[j]&(1<<i)))cnt++;
+
+        //add to answer cnt*(n-cnt)*2
+        ans += (cnt*((LL)n-cnt)*2)%MOD;
+        if(ans>=MOD)ans-=MOD;
+
+    }
+
+    return ans;
+}
