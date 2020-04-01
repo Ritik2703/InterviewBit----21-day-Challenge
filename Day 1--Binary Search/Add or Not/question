@@ -1,0 +1,39 @@
+Given an array of integers A of size N and an integer B.
+
+In a single operation, any one element of array can be increased by 1. You are allowed to do atmost B such operations.
+
+Find the number with maximum number of occurrences and return an array C of size 2, where C[0] is number of occurence and C[1] is the number with maximum occurence. If there are several such numbers, your task is to find the minimum one.
+
+
+
+Input Format
+
+The first argument given is the integer array A.
+The second argument given is the integer B.
+Output Format
+
+Return an array C of size 2, where C[0] is number of occurence and C[1] is the number with maximum occurence.
+Constraints
+
+1 <= N <= 10^5
+-10^9 <= A[i] <= 10^9
+0 <= B <= 10^9
+For Example
+
+Input 1:
+    A = [3, 1, 2, 2, 1]
+    B = 3
+Output 1:
+    C = [4, 2]
+Explanation:
+
+    Apply operations on A[2] and A[4]
+    A = [3, 2, 2, 2, 2]
+    Maximum occurence =  4
+    Minimum value of element with maximum occurence = 2
+
+Input 2:
+    A = [5, 5, 5]
+    B = 3
+Output 2:
+    C = [3, 5]
